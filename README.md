@@ -75,8 +75,7 @@ forrás:
 
 	+ Lehetővé teszi a szervernek a kliens terhelés kihelyezését a kezelhetőségért.
 	+ Lehetővé teszi a szervernek, hogy a kliensek egy csoportja felett végezzen cachelést, a jobb teljesítményért.
-
-(18-19 az ea alapján van, de szerintem nem ok)
+	+ (18-19 az ea alapján van, de szerintem nem ok)
 
 20. Mit nevezünk munkamenetnek az ISO/OSI referencia modellben?
 	+ Egy munkamenet (Session) a egymással összefüggő hálózati interakciók sorozata egy alkalmazási feladat elvégzése során.
@@ -204,7 +203,7 @@ forrás:
 
 50. Mit nevezünk torlódásnak TCP esetén?
 	+ Ha a terhelés túl nagy, túlcsordulnak a pufferek, csomagok vesznek el, újra kell küldeni, drasztikusan nő a válaszidő. Ezt a torlódásnak nevezzük.
-	
+
 Mikor nevezünk egy torlódás kerülési algoritmust hatékonynak?
 Mikor nevezünk egy torlódás kerülési algoritmust fairnek?
 Mi a forgalomirányító algoritmusok definiciója?
