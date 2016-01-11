@@ -1,9 +1,9 @@
 #Számítógépes hálózatok definíciók kidolgozás 2015-16/1 félév
 
-források: 
+forrás: 
 + peet91: számhálók definíció kidolgozás 2014 (elte.sharq.hu)
 + előadás diái (http://people.inf.elte.hu/acszolta/computer_networks)
-+ wikipedia (https://en.wikipedia.org/wiki/Revocation_list, ...)
++ wikipedia (https://en.wikipedia.org/wiki/Revocation_list, https://en.wikipedia.org/wiki/Congestion_window, )
 
 1. Hány réteget különböztet meg az Tannenbaum-féle hibrid rétegmodell?
 	+ 5 félét.
@@ -111,25 +111,84 @@ források:
 	+ Webes biztonságnál alkalmazzák, publikus kulcsok visszavonására. A CRL visszavont tanúsítványok, sorozatszámok listája.
 
 28. Mi a Content Delivery Network? Mire nyújt megoldást?
-	+ 
-Mik a p2p hálózatok legfontosabb jellemzõi?
-Mi a szerepe egy peer-nek egy p2p hálózatban? 
-Mit nevezünk choke peer-nek? 
-Mi az a seed peer? 
-Mire szolgál az állapot nélküli tûzfal? 
-Mire szolgál az állapot alapú tûzfal? 
-Mire szolgál az alkalmazás réteg tûzfal?
-Mi az a DeMilitarized Zone? Mire szolgál?
-Mire szolgál a TCP protokoll? Mik a fõbb jellemzõi?
-Mire szolgál az UDP protokoll? Mik a fõbb jellemzõi?
-Mit neveznek adási ablaknak?
-Mit neveznek vételi ablaknak?
-Mi a CRC? Mire használható? 
-Hogyan történik egy TCP kapcsolat felépítése? Mik a lépései? 
-Mit jelent az RTO, és hol használják?
-Mi a TCP Nagle algoritmus mûködési alapelve? 
-Mi az a "slow start" TCP esetén? 
-Mi az a torlódási ablak? Mire szolgál? 
+	+ A népszerű tartalmak a kliensekhez közel helyezése.
+	+ Terhelés elosztása, torlódások elkerülése, felhasználói élmény javítása.
+
+29. Mik a p2p hálózatok legfontosabb jellemzõi?
+	+ Nincs szerver. 
+	+ A kommunikáció peer-ek között folyik és önszerveződő. 
+	+ Skálázási problémák merülnek fel.
+
+30. Mi a szerepe egy peer-nek egy p2p hálózatban? 
+	+ Feltöltés a többiek segítésére. 
+	+ Letöltés saját magának.
+
+31. Mit nevezünk choke peer-nek?
+	+ Olyan peer, aki korlátozza a letöltést más peer-ek részére.
+
+32. Mi az a seed peer? 
+	+ Olyan speciális peer, aki rendelkezik a letöltendő fájl összes darabjával. 
+
+33. Mire szolgál az állapot nélküli tûzfal? 
+	+ Statikus szűrő szabályokat valósít meg. 
+	+ Engedélyezhető/tiltható vele sokféle szolgáltatás és hálózati cél is. 
+	+ Általában UDP/TCP portokat használ. (például  a 23-as TCP port tiltása a telnet letiltására) 
+
+34. Mire szolgál az állapot alapú tûzfal? 
+	+ Állapot alapú csomagszűrést valósít meg, amely a csomagváltást nyomon követi. 
+	+ NAT példa: „A TCP csomagok fogadása egy belső hoszt csatlakozása után.” 
+
+35. Mire szolgál az alkalmazás réteg tûzfal?
+	+ Alkalmazásokra és tartalmakra alapuló szabályokat valósít meg. (például víruskeresés a csomagokban) 
+	+ Az csomagok vizsgálata magasabb rétegek emulálásával, például az alkalmazás üzenetek újra összegyűjtésével.
+
+36. Mi az a DeMilitarized Zone? Mire szolgál?
+	+ A tűzfal és az internet közötti réteg.
+	+ Web szerverek, email szerverek, chat szerverek elhelyezése.
+	+ A fertőzések tovább terjedésének meggátolására.
+
+37. Mire szolgál a TCP protokoll? Mik a fõbb jellemzõi?
+	+ megbízható adatfolyam létrehozása két végpont között; 
+	+ az alkalmazási réteg adatáramát osztja csomagokra; 
+	+ a másik végpont a csomagok fogadásról nyugtát küld; 
+
+38. Mire szolgál az UDP protokoll? Mik a fõbb jellemzõi?
+	+  egyszerű nem megbízható szolgáltatás csomagok küldésére; 
+	+ az alkalmazási réteg határozza meg a csomag méretét; 
+	+ az inputot egy datagrammá alakítja;
+
+39. Mit neveznek adási ablaknak?
+	+ TODO
+
+40. Mit neveznek vételi ablaknak?
+	+ TODO
+
+41. Mi a CRC? Mire használható? 
+	+ Hálózatok, tárolóegységek körében használt hibajelző kód.
+	+ A küldő az adatokhoz polinomosztással ( x^rM(x)/G(x) ) ellenőrzőértéket rendel. Fogadáskor a vevő elvégzi az osztást ( (T(x)+E(x))/G(x) ) a generátorpolinommal. Ha nem 0 eredményt kap, hiba történt.
+
+42. Hogyan történik egy TCP kapcsolat felépítése? Mik a lépései? 
+	+  Rendszerint kliens szerver kapcsolat van. 
+	+ Ez esetben a felépítés 3 TCP csomaggal történik. 
+	+ Az MSS is átvitelre kerül az első SYN-szegmensben.
+	![TCP kapcsolat felepitese](/images/42tcp.png)
+
+43. Mit jelent az RTO, és hol használják?
+	+ Retransmission Timeout, szabályozza az időközt a küldés és egy duplikátum újraküldése között, ha egy nyugta kimarad.
+	+ TCP esetén használják.
+
+44. Mi a TCP Nagle algoritmus mûködési alapelve? 
+	+ Kis csomagok nem kerülnek addig küldésre, amíg nyugták hiányoznak. 
+	  + egy csomag kicsi, ha az adathossz < MSS 
+	+ Ha a korábban küldött csomag nyugtája megérkezik, küldi a következőt
+
+45. Mi az a "slow start" TCP esetén? 
+	+ exponenciális növekedés (hisztórikus elnevezés: korábban még aggresszívebb sémák)
+
+46. Mi az a torlódási ablak? Mire szolgál? 
+	+ TCP esetén megszabja az átmenő adatok méretét a küldő irányából.
+	+ Célja, hogy elkerüljük a fogadó túlterhelését
+
 Mi az gyors újraadás TCP Tahoe esetén? 
 Mit jelenthet az ha három azonos nyugta érkezik egymás után? 
 Mi az AIMD torlódás kerülési stratégia lényege?  
