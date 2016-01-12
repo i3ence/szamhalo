@@ -635,26 +635,26 @@ forrás:
 * Rendelje a ************* fogalmat az TCP/IP rétegmodell megfelelõ rétegéhez.
 
 ALKALMAZÁSI RÉTEG (Application layer) (https://en.wikipedia.org/wiki/Category:Application_layer_protocols)
-HTTP, DHCP, BitTorrent, munkamenet
+	+ HTTP, DHCP, BitTorrent, munkamenet
 
 SZÁLLÍTÓI RÉTEG (Transport layer) (https://en.wikipedia.org/wiki/Category:Transport_layer_protocols)
-SOCKET
+	+ SOCKET
 
 HÁLÓZATI RÉTEG (Internet layer) (https://en.wikipedia.org/wiki/Category:Internet_layer_protocols)
-ICMP, forgalomirányítas, split horizon, routing table, BGP
+	+ ICMP, forgalomirányítas, split horizon, routing table, BGP
 
 KAPCSOLATI RÉTEG (Link layer/Network Access/Network Interface) (https://en.wikipedia.org/wiki/Category:Link_protocols)
-Ethernet, PPP, 10Base5, 10Base-F, 10Base2, 10Base-F,  (MACAW, NAV, RTS, CTS, backward learning ?)
+	+ Ethernet, PPP, 10Base5, 10Base-F, 10Base2, 10Base-F,  (MACAW, NAV, RTS, CTS, backward learning ?)
 
 
 * A ********** réteg hányadik rétege az ISO/OSI referencia modellnek?
-7 - Alkalmazási
-6 - Megjelenítési
-5 - Munkamenet
-4 - Szállítási
-3 - Hálózati
-2 - Adatkapcsolati
-1 - Fizikai
+	+ 7 - Alkalmazási
+	+ 6 - Megjelenítési
+	+ 5 - Munkamenet
+	+ 4 - Szállítási
+	+ 3 - Hálózati
+	+ 2 - Adatkapcsolati
+	+ 1 - Fizikai
 
 
 * Mi az FTP protokoll alapértelmezett portja?
@@ -681,7 +681,23 @@ Ethernet, PPP, 10Base5, 10Base-F, 10Base2, 10Base-F,  (MACAW, NAV, RTS, CTS, bac
 
 * Az IPv6 protokollban hány darab kiegészítõ fejrész lehetséges?
 	+ 6
+
 * Hány domén név létezik a „root” névszerverekhez?
 	+ 13
+
 * Hány elosztott „root” névszerver instancia létezik?
 	+ 250
+
+
+#Számolós feladatok (?)
+
+	* Ha feltételezzük, hogy a kódszavaink egy kódkönyvben egy darab paritás bittel vannak kiegészítve, akkor mekkora a kódkönyvünk Hamming-távolsága?
+	* Ha van egy S kódkönyvünk, amelyben a Hamming-távolsága 3, akkor az alábbiak közül melyik a helyes állítás?
+	* Tekintsünk az adatkapcsolati rétegben egy bájt alapú protokollt, melyben a keretek egy jelzõ bájttal kezdõdnek és végzõdnek, és a protokoll bájt beszúrást használ. Tudjuk, hogy összesen 8 keretet továbbítunk, amelyek összesített hossza –a médiumon áthaladó bájtok száma– 4096 bájt. Továbbá tudjuk azt is, hogy az átvitelre szánt eredeti ipdatagramban pontosan 45 ESC és pontosan 30 FLAG bájt fordult elõ. Mekkora méretû volt a datagram a keretezés és bájt beszúrás elõtt?
+	* Ha 16-bites CRC polinomot használunk, akkor mennyi redundáns bittel kell kiegészítenünk az eredeti adatot?
+	* A fellépõ ütközések feloldására adaptív fa bejárást használva legrosszabb esetben hány versengési idõrésre lesz szükség, ha az állomások száma 2^n?
+	* Hány hosztot képes kezelni maximálisan az a hálózat, amelynek címe 135.46.56.0/19?
+	* Hogyan befolyásolja a minimális keretméretet egy Ethernet hálózatban, ha a két legtávolabbi hoszt távolsága 33%-kal meg nõ?
+	* Hogyan befolyásolja a minimális keretméretet egy Ethernet hálózatban, ha a sávszélesség 33%-kal le csökken?
+	* Egy szimbólum átviteléhez szükséges idõ 10 µs. Mekkora a szimbólumráta? Mekkora az adatráta, ha 16 szimbólumot használunk?
+	* Egy küldõ egy üvegszál kábelen egy fényszignált küld PS teljesítménnyel. Tegyük fel, hogy a fogadónál ennek a szignálnak legalább PS/100 teljesítménnyel kell megérkezni ahhoz, hogy fel tudja ismerni. A kábelben a szignál teljesítményének csökkenése kilométerenként 8%. Milyen hosszú lehet a kábel?
