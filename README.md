@@ -214,7 +214,7 @@ forrás:
 	+ A hálózati réteg szoftverének azon része, amely azért a döntésért felelős, hogy a bejövő csomag melyik kimeneti vonalon kerüljön továbbításra.
 	+ A folyamat két jól-elkülöníthető lépésre bontható fel:
 	  + Forgalomirányító táblázatok feltöltése és karbantartása.
-		+ Továbbítás.
+	  + Továbbítás.
 
 54. Mi a statikus forgalomirányító algoritmusok fõ jellemzõje?
 	+ Offline meghatározás, betöltés a router-ekbe induláskor.
@@ -455,7 +455,7 @@ forrás:
 
 110. Mutassa be röviden a szimplex megáll-és-vár protokollt!
 	+ Környezet:
-	  + mind az adó, mind a vevő hálózati rétegei mindig készen állnak
+		+ mind az adó, mind a vevő hálózati rétegei mindig készen állnak
 		+ A vevőnek ∆t időre van szüksége a bejövő keret feldolgozására (nincs pufferelés és sorban állás sem)
 		+ Az adatkapcsolati rétegek közötti kommunikációs csatorna sosem rontja vagy veszíti el a kereteket
 
