@@ -3,7 +3,7 @@
 forrás:
 + peet91: számhálók definíció kidolgozás 2014 (elte.sharq.hu)
 + előadás diái (http://people.inf.elte.hu/acszolta/computer_networks)
-+ wikipedia (https://en.wikipedia.org/wiki/Revocation_list, https://en.wikipedia.org/wiki/Congestion_window, )
++ wikipedia (https://en.wikipedia.org/wiki/Revocation_list, https://en.wikipedia.org/wiki/Congestion_window, https://en.wikipedia.org/wiki/IPv4_subnetting_reference, https://en.wikipedia.org/wiki/IPv6_address)
 
 1. Hány réteget különböztet meg az Tannenbaum-féle hibrid rétegmodell?
 	+ 5 félét.
@@ -170,7 +170,7 @@ forrás:
 	+  Rendszerint kliens szerver kapcsolat van.
 	+ Ez esetben a felépítés 3 TCP csomaggal történik.
 	+ Az MSS is átvitelre kerül az első SYN-szegmensben.
-	![TCP kapcsolat felepitese](/images/42tcp.png)
+	+ ![TCP kapcsolat felepitese](/images/42tcp.png)
 
 43. Mit jelent az RTO, és hol használják?
 	+ Retransmission Timeout, szabályozza az időközt a küldés és egy duplikátum újraküldése között, ha egy nyugta kimarad.
@@ -204,56 +204,212 @@ forrás:
 50. Mit nevezünk torlódásnak TCP esetén?
 	+ Ha a terhelés túl nagy, túlcsordulnak a pufferek, csomagok vesznek el, újra kell küldeni, drasztikusan nő a válaszidő. Ezt a torlódásnak nevezzük.
 
-Mikor nevezünk egy torlódás kerülési algoritmust hatékonynak?
-Mikor nevezünk egy torlódás kerülési algoritmust fairnek?
-Mi a forgalomirányító algoritmusok definiciója?
-Mi a statikus forgalomirányító algoritmusok fõ jellemzõje?
-Mi az adaptív forgalomirányító algoritmusok fõ jellemzõje?
-Mi a hierarchikus forgalomirányítás lényege?
-Mit nevezünk adatszórásnak vagy broadcasting-nak?   
-Mit nevezünk többesküldésnek vagy multicasting-nak?
-Mi a többcélú forgalomirányítás lényege?
-Mire szolgál a DF bit az IPv4 fejlécében?
-Mire szolgál a MF bit az IPv4 fejlécében?
-Mire szolgál a szolgálat típusa mezõ az IPv4 fejlécében?
-Mire szolgál az élettartam (TTL) mezõ az IPv4 fejlécében?
-Mi az IPv4 cím és hogyan ábrázoljuk?
-Mi az IPv6 cím és hogyan ábrázoljuk?
-Milyen speciális IPv4 címek vannak?
-Mi az alhálózati maszk és mire szolgál?
-Mire szolgál az ICMP protokoll?
-Mire szolgál az ARP protokoll?
-Mi az RARP? Mire használják?
-Mi az BOOTP? Mire használják?
-Mi az DHCP? Mire használják?
-Mi az a gerinchálózat? Hol használják és mire?
-Mely 3 féle összeköttetést és hálózatot támogatja az OSPF?
-Milyen úttípusok léteznek az OSPF logikája szerint?
-Mit nevez a BGP csonka hálózatnak?
-Mit nevez a BGP többszörösen bekötött hálózatnak?
-Mit nevez a BGP tranzit hálózatnak?
-Soroljon fel 4 vezetékes átviteli közeget. (8!)
-Mit nevezünk frekvenciának? Mi a mértékegysége és hogyan jelölik?
-Soroljon fel 3 elektromágneses tartományt.
-Soroljon fel 4 vezeték nélküli átviteli közeget. (13!)
-Mi a szimbólumráta és az adatráta? Mi a mértékegységük?
-Soroljon fel 3 óraszinkronizációs módszert.
-Mi az önütemezõ jel? Mire használható?
-Mi a digitális kódok leírásának 3 fõ jellemzõje?
-Mi az alapsáv?
-Mi a szélessáv?
-Mi az amplitúdó moduláció?
-Mi a frekvencia moduláció?
-Mi a fázis moduláció?
-Mit nevezünk BER-nek? Mire használják?
-Milyen tényezõktõl függ a BER?
-Mi a CDMA?
-Mi az a Walsh mátrix? Mire használható?
-Az adatkapcsolati réteg milyen jól definiált interfészeket biztosít a hálózati réteg felé?
-Milyen módszereket ismer a keretezésre az adatkapcsolati rétegben?
-Hogyan mûködik a karakterszámlálás?
-Hogyan mûködik a karakterbeszúrás?
-Hogyan mûködik a bitbeszúrás?
+51. Mikor nevezünk egy torlódás kerülési algoritmust hatékonynak?
+	+ Egy jó torlódáselkerülési (angolul congestion avoidance) stratégia a hálózat terhelését a könyök közelében tartja...
+
+52. Mikor nevezünk egy torlódás kerülési algoritmust fairnek?
+	+ ...Emellett fontos, hogy minden résztvevőt egyforma rátával szolgáljunk ki.
+
+53. Mi a forgalomirányító algoritmusok definiciója?
+	+ A hálózati réteg szoftverének azon része, amely azért a döntésért felelős, hogy a bejövő csomag melyik kimeneti vonalon kerüljön továbbításra.
+	+ A folyamat két jól-elkülöníthető lépésre bontható fel:
+	  + Forgalomirányító táblázatok feltöltése és karbantartása.
+		+ Továbbítás.
+
+54. Mi a statikus forgalomirányító algoritmusok fõ jellemzõje?
+	+ Offline meghatározás, betöltés a router-ekbe induláskor.
+
+55. Mi az adaptív forgalomirányító algoritmusok fõ jellemzõje?
+	+ A topológia és rendszerint a forgalom is befolyásolhatja a döntést.
+
+56. Mi a hierarchikus forgalomirányítás lényege?
+	+ A router-eket tartományokra osztjuk. A saját tartományát az összes router ismeri, de a többi belső szerkezetéről nincs tudomása.
+	+ Nagy hálózatok esetén többszintű hierarchia lehet szükséges. Például: tartományok kerületekbe osztása, a kerületeket zónákba osztjuk, a zónákat osztályokba szervezzük, etc.
+
+57. Mit nevezünk adatszórásnak vagy broadcasting-nak?   
+	+ Egy csomag mindenhová történő egyidejű küldése.
+
+58. Mit nevezünk többesküldésnek vagy multicasting-nak?
+	+ Egy csomag meghatározott csoporthoz történő egyidejű küldése.
+
+59. Mi a többcélú forgalomirányítás lényege?
+	+ Csomagban van egy lista a rendeltetési helyekről, amely alapján a router-ek eldöntik a vonalak használatát, mindegyik vonalhoz készít egy másolatot és belerakja a megfelelő célcím listát. (multidestination routing)
+
+60. Mire szolgál a DF bit az IPv4 fejlécében?
+	+ „ne darabold” flag a router-eknek (Don't Fragment)
+61. Mire szolgál a MF bit az IPv4 fejlécében?
+	+ „több darab” flag minden darabban be kell legyen állítva, kivéve az utolsót. (More Fragments)
+
+62. Mire szolgál a szolgálat típusa mezõ az IPv4 fejlécében?
+	+ szolgálati osztályt jelöl (3-bites precedencia, 3 jelzőbit [D,T,R])
+
+63. Mire szolgál az élettartam (TTL) mezõ az IPv4 fejlécében?
+	+ Másodpercenként kellene csökkenteni a mező értékét, minden ugrásnál csökkentik eggyel az értékét.
+
+64. Mi az IPv4 cím és hogyan ábrázoljuk?
+	+  Minden hoszt és minden router az Interneten rendelkezik egy IP-címmel, amely a hálózat számát és a hoszt számát kódolja. (egyedi kombináció)
+	+ 4 bájton ábrázolják az IP-címet.
+
+65. Mi az IPv6 cím és hogyan ábrázoljuk?
+	+ IP protokoll új verziója, nagyobb címtartomány, közvetlen végponti címezhetőséggel
+	+ Ábrázolás: 128 biten, pl. 2001:0db8:85a3:0000:0000:8a2e:0370:7334 (nullák elhagyhatók)
+
+66. Milyen speciális IPv4 címek vannak?
+	+ x.x.x.0: hálózat azonosító
+	+ x.x.x.255: hálózat broadcast címe
+
+67. Mi az alhálózati maszk és mire szolgál?
+	+ Bitmaszk, amivel feloszthatjuk az IP azonosítót a hálózat és a hoszt azonosítójára.
+
+68. Mire szolgál az ICMP protokoll?
+	+ Internet Control Message Protocol
+	+ Feladata:  Váratlan események jelentése.
+
+69. Mire szolgál az ARP protokoll?
+	+ Address Resolution Protocol
+	+ Feladata:  Az IP cím megfeleltetése egy fizikai címnek.
+
+70. Mi az RARP? Mire használják?
+	+ Reverse Address Resolution Protocol
+	+ Feladata: A fizikai cím megfeleltetése egy IP címnek.
+
+71. Mi az BOOTP? Mire használják?
+	+ Bootstrap Protocol
+	+ Feladata: Egy kliens használhatja, hogy címet kapjon a konfigurációs szervertől.
+
+72. Mi az DHCP? Mire használják?
+	+ Dynamic Host Configuration Protocol
+	+ Feladata: Automatikus címkiosztás a hosztoknak.
+
+73. Mi az a gerinchálózat? Hol használják és mire?
+	+ Backbone Network
+	+ Hálózati infrastruktúra része, különféle hálózatokat köt össze, ezzel biztosíva at információáramlást a hálózatok közt.
+
+74. Mely 3 féle összeköttetést és hálózatot támogatja az OSPF?
+	+ Kétpontos vonalak két router között.
+	+ Többszörös hozzáférésű hálózatok adatszórási lehetőséggel.
+	+ Többszörös hozzáférésű hálózatok adatszórási lehetőség nélkül.
+
+75. Milyen úttípusok léteznek az OSPF logikája szerint?
+	+ területen belüli
+	+ területek közötti
+	+ AS-ek közötti
+
+76. Mit nevez a BGP csonka hálózatnak?
+	 + Amelyeknek csak egyetlen összeköttetésük van a BGP gráffal.
+
+77. Mit nevez a BGP többszörösen bekötött hálózatnak?
+	+ Amelyeket használhatna az átmenő forgalom, de ezek ezt megtagadják.
+
+78. Mit nevez a BGP tranzit hálózatnak?
+	+  Amelyek némi megkötéssel, illetve általában fizetség ellenében, készek kezelni harmadik fél csomagjait.
+
+79. Soroljon fel 4 vezetékes átviteli közeget. (8!)
+	+ Mágneses adathordozók
+	+ Sodort érpár
+	+ Koaxális kábel
+	+ Fényvezető szálak
+
+80. Mit nevezünk frekvenciának? Mi a mértékegysége és hogyan jelölik?
+	+ Elektromágneses hullám másodpercenkénti rezgésszáma.
+	+ Jelölés: f
+	+ Mértékegység: Hertz (Hz)
+
+81. Soroljon fel 3 elektromágneses tartományt.
+	+ Rádióhullám
+	+ Mikrohullám
+	+ Infavörös sugarak
+	+ Röntgensugarak
+
+82. Soroljon fel 4 vezeték nélküli átviteli közeget. (13!)
+	+ Rádiófrekvenciás átvitel
+	+ Mikrohullámú átvitel
+	+ Infravörös és milliméteres hullámú átvitel
+	+ Látható fényhullámú átvitel
+
+83. Mi a szimbólumráta és az adatráta? Mi a mértékegységük?
+	+ Baud – Szimbólumok száma másodpercenként
+	+ Adatráta – Bitek száma másodpercenként
+
+84. Soroljon fel 3 óraszinkronizációs módszert.
+	+ Explicit órajel
+	+ Kritikus időpontok
+	+ Szimbólum kódok
+
+85. Mi az önütemezõ jel? Mire használható?
+	+ Külön órajel szinkronizáció nélkül dekódolható jel.
+	+ Szinkronizációnál szimbólumkód esetén használható.
+
+86. Mi a digitális kódok leírásának 3 fõ jellemzõje?
+	+ Mi történik egy szignál intervallum
+		+ elején?
+		+ közepén?
+		+ végén?
+
+87. Mi az alapsáv?
+	+ Baseband
+	+ A digitális jel direkt árammá vagy feszültséggé alakulm a jel minden frekvencián átvitelre kerül.
+	+ Átviteli korlátok
+
+88. Mi a szélessáv?
+	+ Broadband
+	+ Széles frekvencia tartományban történik az átvitel.
+
+89. Mi az amplitúdó moduláció?
+	+ Az s(t) szignált a szinusz görbe amplitúdójaként kódoljuk.
+
+90. Mi a frekvencia moduláció?
+	+ Az s(t) szignált a szinusz görbe frekvenciájában kódoljuk.
+
+91. Mi a fázis moduláció?
+	+  Az s(t) szignált a szinusz görbe fázisában kódoljuk.
+
+92. Mit nevezünk BER-nek? Mire használják?
+	+ Bit Error Rate - Bithiba gyakoriság
+	+ A hibásan fogadott bitek részaránya.
+
+93. Milyen tényezõktõl függ a BER?
+	+ a jel erőségétől,
+	+ a zajtól,
+	+ az átviteli sebességtől,
+	+ a felhasznált módszertől.
+
+94. Mi a CDMA?
+	+ Code Division Multiple Access
+	+ A harmadik generációs mobiltelefon hálózatok alapját képezi (IS-95 szabvány)
+	+ Minden állomás egyfolytában sugározhat a rendelkezésre álló teljes frekvenciasávon
+	+ Feltételezi, hogy a többszörös jelek lineárisan összeadódnak.
+	+ Kulcsa: a hasznos jel kiszűrése
+
+95. Mi az a Walsh mátrix? Mire használható?
+	+ CDMA szinkron esetben a Walsh mátrix oszlopai vagy sorai egyszerű módon meghatároznak egy kölcsönösen ortogonális töredék sorozat halmazt.
+	+ ![Walsh-matrix](/95www Walshy com.png)
+
+96. Az adatkapcsolati réteg milyen jól definiált interfészeket biztosít a hálózati réteg felé?
+	+ nyugtázatlan összeköttetés alapú szolgálat
+	+ nyugtázott összeköttetés nélküli szolgálat
+	+ nyugtázott összeköttetés alapú szolgálat (3 fázis)
+
+97. Milyen módszereket ismer a keretezésre az adatkapcsolati rétegben?
+	+ karakterszámlálás
+	+ kezdő és végkarakterek karakterbeszúrással
+	+ kezdő és végjelek bitbeszúrása
+	+ fizikai rétegbeli kódolás-sértés
+
+98. Hogyan mûködik a karakterszámlálás?
+	+ A keretben lévő karakterek számának megadása a keret fejlécében lévő mezőben
+	+ A vevő adatkapcsolati rétege tudni fogja a keret végét
+	+ Probléma: nagyon érzékeny a hibára a módszer
+
+99. Hogyan mûködik a karakterbeszúrás?
+	+ Különleges bájtok a keret elejének és végének jelzésére
+	+ Korábban két speciális bájtot használtak, manapság megegyeznek, aminek neve jelző bájt (angolul flag byte)
+	+ Adatfolyamban szereplő speciális bájtokhoz ESC bájt használata (bájt beszúrás)
+
+100. Hogyan mûködik a bitbeszúrás?
+	+ Minden keret egy speciális bitmintával kezdődik (flag bájt, 01111110)
+	+ Minden egymást követő 5 hosszú folytonos 1-es bit sorozat után beszúr egy 0-át
+
 Mi az egyszerû bithiba definiciója?
 Definiálja a csoportos bithibát!
 Definiálja egy tetszõleges S kódkönyv Hamming távolságát?
