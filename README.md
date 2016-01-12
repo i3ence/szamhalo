@@ -383,7 +383,7 @@ forrás:
 
 95. Mi az a Walsh mátrix? Mire használható?
 	+ CDMA szinkron esetben a Walsh mátrix oszlopai vagy sorai egyszerű módon meghatároznak egy kölcsönösen ortogonális töredék sorozat halmazt.
-	+ ![Walsh-matrix](/95www Walshy com.png)
+	+ ![Walsh-matrix](/images/95www Walshy com.png)
 
 96. Az adatkapcsolati réteg milyen jól definiált interfészeket biztosít a hálózati réteg felé?
 	+ nyugtázatlan összeköttetés alapú szolgálat
@@ -410,16 +410,60 @@ forrás:
 	+ Minden keret egy speciális bitmintával kezdődik (flag bájt, 01111110)
 	+ Minden egymást követő 5 hosszú folytonos 1-es bit sorozat után beszúr egy 0-át
 
-Mi az egyszerû bithiba definiciója?
-Definiálja a csoportos bithibát!
-Definiálja egy tetszõleges S kódkönyv Hamming távolságát?
-Mi az a Hamming korlát?
-Milyen összefüggés ismeretes egy tetszõleges kódkönyv a Hamming távolsága és hibafelismerõ képessége között?
-Milyen összefüggés ismeretes egy tetszõleges kódkönyv a Hamming távolsága és hibajavitási képessége között?
-Mi a kódráta és a kód távolság? Milyen a rátája és távolsága egy jó kódkönyvnek?
-CRC esetén mit lehet mondani hibajelzõ képességérõl, ha a generátor polinom x+1 többszöröse?
-Mutassa be röviden a korlátozás nélküli szimplex protokollt!
-Mutassa be röviden a szimplex megáll-és-vár protokollt!
+101. Mi az egyszerû bithiba definiciója?
+	+ az adategység 1 bitje nulláról egyre avagy egyről nullára változik.
+	+ ![egyszeru bithiba](/images/101ebhiba.png)
+
+102. Definiálja a csoportos bithibát!
+	+  Burst Error – Az átviteli csatornán fogadott bitek egy olyan folytonos sorozata, amelynek az első és utolsó szimbóluma hibás, és nem létezik ezen két szimbólummal határolt részsorozatban olyan m hosszú részsorozat, amelyet helyesen fogadtunk volna a hiba burst-ön belül.
+	+ ![burst hiba](/images/102bhiba.png)
+
+103. Definiálja egy tetszõleges S kódkönyv Hamming távolságát?
+	+ Legyen S egyenlő hosszú bitszavak halmaza, ekkor S Hamming távolsága az alábbi:
+	+ ![hamming tavolsag](/images/103hamming.png)
+	+ Jelölés: d(S).
+
+104. Mi az a Hamming korlát?
+	+ ![hamming korlat](/images/104hammingkorlat.png)
+
+105. Milyen összefüggés ismeretes egy tetszõleges kódkönyv a Hamming távolsága és hibafelismerõ képessége között?
+	+ Azaz d bit hiba felismeréséhez a megengedett keretek halmazában legalább d+1 Hamming távolság szükséges.
+
+106. Milyen összefüggés ismeretes egy tetszõleges kódkönyv a Hamming távolsága és hibajavitási képessége között?
+	+ d bit hiba javításához a megengedett keretek halmazában legalább 2d+1 Hamming távolság szükséges
+
+107. Mi a kódráta és a kód távolság? Milyen a rátája és távolsága egy jó kódkönyvnek?
+	+ ![kod rata](/images/107rata.png)
+	+ ![kod tavolsag](/images/107tavolsag.png)
+	+ A jó kódoknak a rátája és a távolsága is nagy.
+
+108. CRC esetén mit lehet mondani hibajelzõ képességérõl, ha a generátor polinom x+1 többszöröse?
+	+Ha G(x) az x+1 többszöröse, akkor minden páratlan számú hiba felismerhető.
+
+109. Mutassa be röviden a korlátozás nélküli szimplex protokollt!
+	+ Környezet:
+	  + Mind az adó, mind a vevő hálózati rétegei mindig készen állnak
+	  + A feldolgozási időktől eltekintünk
+	  + Végtelen puffer-területet feltételezünk
+	  + Az adatkapcsolati rétegek közötti kommunikációs csatorna sosem rontja vagy veszíti el a kereteket
+
+	+ Protokoll:
+	  + Résztvevők: küldő és vevő
+	  + Nincs sem sorszámozás, sem nyugta
+	  + Küldő végtelen ciklusban küldi kifele a kereteket folyamatosan
+	  + A vevő kezdetben várakozik az első keret megérkezésére, keret érkezésekor a hardver puffer tartalmát változóba teszi és az adatrészt továbbküldi a hálózati rétegnek.
+
+110. Mutassa be röviden a szimplex megáll-és-vár protokollt!
+	+ Környezet:
+	  + mind az adó, mind a vevő hálózati rétegei mindig készen állnak
+		+ A vevőnek ∆t időre van szüksége a bejövő keret feldolgozására (nincs pufferelés és sorban állás sem)
+		+ Az adatkapcsolati rétegek közötti kommunikációs csatorna sosem rontja vagy veszíti el a kereteket
+
+	+ Protokoll:
+		+ résztvevők: küldő és vevő
+		+ küldő egyesével küldi kereteket és addig nem küld újat, még nem kap nyugtát a vevőtől
+		+ a vevő kezdetben várakozik az első keret megérkezésére, keret érkezésekor a hardver puffer tartalmát változóba teszi és az adatrészt továbbküldi a hálózati rétegnek, végül nyugtázza a keretet.
+
 Mutassa be röviden a csúszóablak protokollt!
 Mi az N-visszalépéses stratégia lényege?
 Mi a szelektív ismétléses stratégia lényege?
