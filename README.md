@@ -629,3 +629,59 @@ forrás:
 
 143. Mi a repeater, és mire használják?
 	+ Analóg eszköz, amely két kábelszegmenshez csatlakozik. Az átvitel közben legyengült jelek újragenerálására használják. Nem végez intelligens forgalomirányítást.
+
+#Feleletválasztós minta
+
+* Rendelje a ************* fogalmat az TCP/IP rétegmodell megfelelõ rétegéhez.
+
+ALKALMAZÁSI RÉTEG (Application layer) (https://en.wikipedia.org/wiki/Category:Application_layer_protocols)
+HTTP, DHCP, BitTorrent, munkamenet
+
+SZÁLLÍTÓI RÉTEG (Transport layer) (https://en.wikipedia.org/wiki/Category:Transport_layer_protocols)
+SOCKET
+
+HÁLÓZATI RÉTEG (Internet layer) (https://en.wikipedia.org/wiki/Category:Internet_layer_protocols)
+ICMP, forgalomirányítas, split horizon, routing table, BGP
+
+KAPCSOLATI RÉTEG (Link layer/Network Access/Network Interface) (https://en.wikipedia.org/wiki/Category:Link_protocols)
+Ethernet, PPP, 10Base5, 10Base-F, 10Base2, 10Base-F,  (MACAW, NAV, RTS, CTS, backward learning ?)
+
+
+* A ********** réteg hányadik rétege az ISO/OSI referencia modellnek?
+7 - Alkalmazási
+6 - Megjelenítési
+5 - Munkamenet
+4 - Szállítási
+3 - Hálózati
+2 - Adatkapcsolati
+1 - Fizikai
+
+
+* Mi az FTP protokoll alapértelmezett portja?
+	+ 21
+
+* Mi az DNS protokoll alapértelmezett portja?
+	+ 53
+
+* Hány darab klasszikus TDLs létezik? (TLDs???)
+	+ 6 (.com, .edu, .gov, .mil, .org, .net)  (wikipedia szerint .int is)
+
+* Mondjon egy nem klasszikus TDLs-t?
+	+ .aero, .museum, .xxx
+	+ .hu, .tv, ...
+
+* Hány bájtos egy UDP fejléc?
+	+ 8 byte
+
+* A standard TCP fejlécben hány darab jelzõ bitet használnak?
+	+ 6 (URG, ACK, PSH, RST, SYN, FIN)
+
+* Hány bájton ábrázolható egy IPv6-os cím?
+	+ 128 bit = 16 byte
+
+* Az IPv6 protokollban hány darab kiegészítõ fejrész lehetséges?
+	+ 6
+* Hány domén név létezik a „root” névszerverekhez?
+	+ 13
+* Hány elosztott „root” névszerver instancia létezik?
+	+ 250
