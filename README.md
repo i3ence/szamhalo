@@ -634,16 +634,16 @@ forrás:
 
 * Rendelje a ************* fogalmat az TCP/IP rétegmodell megfelelõ rétegéhez.
 
-ALKALMAZÁSI RÉTEG (Application layer) (https://en.wikipedia.org/wiki/Category:Application_layer_protocols)
++ ALKALMAZÁSI RÉTEG (Application layer) (https://en.wikipedia.org/wiki/Category:Application_layer_protocols)
 	+ HTTP, DHCP, BitTorrent, munkamenet
 
-SZÁLLÍTÓI RÉTEG (Transport layer) (https://en.wikipedia.org/wiki/Category:Transport_layer_protocols)
++ SZÁLLÍTÓI RÉTEG (Transport layer) (https://en.wikipedia.org/wiki/Category:Transport_layer_protocols)
 	+ SOCKET
 
-HÁLÓZATI RÉTEG (Internet layer) (https://en.wikipedia.org/wiki/Category:Internet_layer_protocols)
++ HÁLÓZATI RÉTEG (Internet layer) (https://en.wikipedia.org/wiki/Category:Internet_layer_protocols)
 	+ ICMP, forgalomirányítas, split horizon, routing table, BGP
 
-KAPCSOLATI RÉTEG (Link layer/Network Access/Network Interface) (https://en.wikipedia.org/wiki/Category:Link_protocols)
++ KAPCSOLATI RÉTEG (Link layer/Network Access/Network Interface) (https://en.wikipedia.org/wiki/Category:Link_protocols)
 	+ Ethernet, PPP, 10Base5, 10Base-F, 10Base2, 10Base-F,  (MACAW, NAV, RTS, CTS, backward learning ?)
 
 
