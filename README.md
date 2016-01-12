@@ -189,7 +189,7 @@ forrás:
 	+ Célja, hogy elkerüljük a fogadó túlterhelését
 
 47. Mi az gyors újraadás TCP Tahoe esetén?
-	+ Fasy Retransmit (diáknál Reno alatt a def)
+	+ Fast Retransmit (diáknál Reno alatti ez a def)
 	+ ha ugyanazon csomaghoz 3 nyugta-duplikátum, azaz 4 azonos nyugta, érkezik (angolul triple duplicate ACK),
 	+ újraküldi az elveszett csomagot, egyidejűleg slow start fázisba lép
 
