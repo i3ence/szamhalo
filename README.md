@@ -3,7 +3,7 @@
 forrás:
 + peet91: számhálók definíció kidolgozás 2014 (elte.sharq.hu)
 + előadás diái (http://people.inf.elte.hu/acszolta/computer_networks)
-+ wikipedia (https://en.wikipedia.org/wiki/Revocation_list, https://en.wikipedia.org/wiki/Congestion_window, https://en.wikipedia.org/wiki/IPv4_subnetting_reference, https://en.wikipedia.org/wiki/IPv6_address)
++ wikipedia (https://en.wikipedia.org/wiki/Revocation_list, https://en.wikipedia.org/wiki/Congestion_window, https://en.wikipedia.org/wiki/IPv4_subnetting_reference, https://en.wikipedia.org/wiki/IPv6_address, etc.)
 
 1. Hány réteget különböztet meg az Tannenbaum-féle hibrid rétegmodell?
 	+ 5 félét.
@@ -464,36 +464,168 @@ forrás:
 		+ küldő egyesével küldi kereteket és addig nem küld újat, még nem kap nyugtát a vevőtől
 		+ a vevő kezdetben várakozik az első keret megérkezésére, keret érkezésekor a hardver puffer tartalmát változóba teszi és az adatrészt továbbküldi a hálózati rétegnek, végül nyugtázza a keretet.
 
-Mutassa be röviden a csúszóablak protokollt!
-Mi az N-visszalépéses stratégia lényege?
-Mi a szelektív ismétléses stratégia lényege?
-Hogyan épül fel egy HDLC keret?
-Milyen keret típusokat használnak a HDLC-ben?
-A felügyelõ kereteknek milyen altípusai vannak?
-A csatorna kiosztásra mik a legelterjedtebb módszerek?
-Röviden mutassa be a frekvenciaosztásos nyalábolás módszerét.
-Röviden mutassa be az idõosztásos nyalábolás módszerét.
-A csatorna modellben mit nevezünk ütközésnek?
-Hogyan mûködik az egyszerû ALOHA protokoll?
-Hogyan mûködik a réselt ALOHA protokoll?
-Hogyan mûködik az 1-perzisztens CSMA protokoll?
-Hogyan mûködik az nem-perzisztens CSMA protokoll?
-Hogyan mûködik az p-perzisztens CSMA protokoll?
-Hogyan mûködik az alapvetõ bittérkép eljárás?
-Hogyan mûködik a bináris visszaszámlálás protokoll?
-Milyen kábelezési topológiákat támogat az Ethernet szabvány?
-Miért van szükség a maximális keretméretre?
-Miért van szükség a minimális keretméretre?
-Mutassa be a minimális keretméretre vonatkozó általános képletet.
-Mik a kettes exponenciális visszalépés algoritmus lépései?
-Mutassa be a rejtett állomás problémáját.
-Mutassa be a megvilágított állomás problémáját.
-Mik a MACA protokoll leglényegesebb lépései?
-Mit nevezünk ad hoc hálózatnak.
-Mi a Network Allocation Vector?
-Mit neveznek Short Inter Frame Spacing-nek?
-Mit neveznek DCF Inter Frame Spacing-nek?
-Mit neveznek PCF Inter Frame Spacing-nek?
-Mit neveznek Extended Inter Frame Spacing-nek?
-Mi a bridge, és mire használják?
-Mi a repeater, és mire használják?
+111. Mutassa be röviden a csúszóablak protokollt!
+	+  Egy adott időpontban egyszerre több keret is átviteli állapotban lehet.
+	+ A fogadó n keretnek megfelelő méretű puffert allokál.
+	+ A küldőnek legfeljebb n, azaz ablak méretnyi, nyugtázatlan keretet küldése engedélyezett.
+	+ A keret sorozatbeli pozíciója adja a keret címkéjét. (sorozatszám)
+
+	+  A küldő nyilvántartja a küldhető sorozatszámok halmazát. (adási ablak)
+	+ A fogadó nyilvántartja a fogadható sorozatszámok halmazát. (vételi ablak)
+	+ A sorozatszámok halmaza minden esetben véges.
+	+ K bites mező esetén: [0..2^K −1 ].
+	+ A adási ablak minden küldéssel szűkül, illetve nő egy nyugta érkezésével.
+
+112. Mi az N-visszalépéses stratégia lényege?
+	+ Az összes hibás keret utáni keretet eldobja és nyugtát sem küld róluk.
+	+ Mikor az adónak lejár az időzítője, akkor újraküldi az összes nyugtázatlan keretet, kezdve a sérült vagy elveszett kerettel.
+
+113. Mi a szelektív ismétléses stratégia lényege?
+	 + A hibás kereteket eldobja, de a jó kereteket a hibás után puffereli.
+	 + Mikor az adónak lejár az időzítője, akkor a legrégebbi nyugtázatlan keretet küldi el újra.
+
+114. Hogyan épül fel egy HDLC keret?
+	+  cím mező
+	 	+ több vonallal rendelkező terminálok esetén van jelentősége,
+		+ pont-pont kapcsolatnál parancsok és válaszok megkülönböztetésére használják
+	+ vezérlés mező
+		+ sorszámozás, nyugtázás és egyéb feladatok ellátására
+	+ adat mező
+		+ tetszőleges hosszú adat lehet
+	+ ellenőrző összeg mező
+		+ CRC kontrollösszeg a CRC-CCITT generátor polinom felhasználásával
+	+ FLAG bájt a keret határok jelzésére
+
+115. Milyen keret típusokat használnak a HDLC-ben?
+	+ Információs
+	+ Felügyelő
+	+ Számozatlan
+
+116. A felügyelõ kereteknek milyen altípusai vannak?
+	+ 0. típus – nyugtakeret (RECEIVE READY);
+	+ 1. típus – negatív nyugtakeret (REJECT);
+	+ 2. típus – VÉTELRE NEM KÉSZ, amely nyugtáz minden keretet a Következőig ((RECEIVE NOT READY))
+	+ 3. típus – SZELEKTÍV ELUTASÍTÁS, amely egy adott keret újraküldésére szólít fel (SELECTIVE REJECT)
+
+117. A csatorna kiosztásra mik a legelterjedtebb módszerek?
+ 	+ statikus módon (FDM, TDM)
+	+ dinamikus módon
+		+ verseny vagy ütközés alapú protokollok (ALOHA, CSMA, CSMA/CD)
+		+ verseny-mentes protokollok (bittérkép-alapú protokollok, bináris visszaszámlálás)
+		+ korlátozott verseny protokollok (adaptív fa protokollok)
+
+118. Röviden mutassa be a frekvenciaosztásos nyalábolás módszerét.
+	+ N darab felhasználót feltételezünk, a sávszélet N egyenlő méretű sávra osztják, és minden egyes sávhoz hozzárendelnek egy felhasználót.
+	+ Következésképpen az állomások nem fogják egymást zavarni.
+	+ Előnyös a használata, ha fix számú felhasználó van és a felhasználók nagy forgalmi igényt támasztanak.
+	+ Löketszerű forgalom esetén használata problémás.
+
+119. Röviden mutassa be az idõosztásos nyalábolás módszerét.
+	+ N darab felhasználót feltételezünk, az időegységet N egyenlő méretű időrésre – úgynevezett slotra – osztják, és minden egyes réshez hozzárendelnek egy felhasználót.
+	+ Löketszerű forgalom esetén használata nem hatékony.
+
+120. A csatorna modellben mit nevezünk ütközésnek?
+	+ Ha két keret egy időben kerül átvitelre, akkor átlapolódnak, és az eredményül kapott jel értelmezhetetlenné válik.
+
+121. Hogyan mûködik az egyszerû ALOHA protokoll?
+	+  A felhasználó akkor vihet át adatot, amikor csak szeretne.
+	+ Ütközés esetén véletlen ideig várakozik az állomás, majd újra próbálkozik.
+
+122. Hogyan mûködik a réselt ALOHA protokoll?
+	+ Az idő diszkrét, keretidőhöz igazodó időszeletekre osztásával az ALOHA rendszer kapacitása megduplázható. (1972, Roberts)
+	+ A csatorna terhelésének kis növekedése is drasztikusan csökkentheti a médium teljesítményét
+
+123. Hogyan mûködik az 1-perzisztens CSMA protokoll?
+	+ Vivőjel érzékelés van, azaz minden állomás belehallgathat a csatornába.
+	+ Folytonos időmodellt használ a protokoll
+	+ Algoritmus:
+		+ Keret leadása előtt belehallgat a csatornába:
+			+ Ha foglalt, akkor addig vár, amíg fel nem szabadul. Szabad csatorna esetén azonnal küld. (perzisztens)
+			+ Ha szabad, akkor küld.
+		+ Ha ütközés történik, akkor az állomás véletlen hosszú ideig vár, majd újrakezdi a keret leadását
+
+124. Hogyan mûködik az nem-perzisztens CSMA protokoll?
+	+ Vivőjel érzékelés van, azaz minden állomás belehallgathat a csatornába.
+	+ Folytonos időmodellt használ a protokoll
+	+ Mohóság kerülése
+	+ Algoritmus:
+		+ Keret leadása előtt belehallgat a csatornába:
+			+ Ha foglalt, akkor véletlen ideig vár (nem figyeli a forgalmat), majd kezdi előröl a küldési algoritmust. (nemperzisztens)
+			+ Ha szabad, akkor küld.
+		+ Ha ütközés történik, akkor az állomás véletlen hosszú ideig vár, majd újrakezdi a keret leadását.
+
+125. Hogyan mûködik az p-perzisztens CSMA protokoll?
+	+ Vivőjel érzékelés van, azaz minden állomás belehallgathat a csatornába.
+	+ Diszkrét időmodellt használ a protokoll
+	+ Algoritmus:
+		+ Adás kész állapotban az állomás belehallgat a csatornába:
+			+ Ha foglalt, akkor vár a következő időrésig, majd megismétli az algoritmust.
+			+ Ha szabad, akkor p valószínűséggel küld, illetve 1-p valószínűséggel visszalép a szándékától a következő időrésig. Várakozás esetén a következő időrésben megismétli az algoritmust. Ez addig folytatódik, amíg el nem küldi a keretet, vagy amíg egy másik állomás el nem kezd küldeni, mert ilyenkor úgy viselkedik, mintha ütközés történt volna.
+		+ Ha ütközés történik, akkor az állomás véletlen hosszú ideig vár, majd újrakezdi a keret leadását.
+
+126. Hogyan mûködik az alapvetõ bittérkép eljárás?
+	+ Az ütköztetési periódus N időrés
+	+ Ha az i-edik állomás küldeni szeretne, akkor a i-edik versengési időrésben egy 1-es bit elküldésével jelezheti. (adatszórás)
+	+ A versengési időszak végére minden állomás ismeri a küldőket. A küldés a sorszámok szerinti sorrendben történik meg.
+	+ alapvető bittérkép eljárás hátránya, hogy az állomások számának növekedésével a versengési periódus hossza is nő
+
+127. Hogyan mûködik a bináris visszaszámlálás protokoll?
+	+ Minden állomás azonos hosszú bináris azonosítóval rendelkezik.
+	+ A forgalmazni kívánó állomás elkezdi a bináris címét bitenként elküldeni a legnagyobb helyi értékű bittel kezdve. Az azonos pozíciójú bitek logikai VAGY kapcsolatba lépnek ütközés esetén. Ha az állomás nullát küld, de egyet hall vissza, akkor feladja a küldési szándékát, mert van nála nagyobb azonosítóval rendelkező küldő.
+
+128. Milyen kábelezési topológiákat támogat az Ethernet szabvány?
+	+ Lineáris
+	+ Gerincvezetékes
+	+ Fa
+	+ Szegmentált
+
+129. Miért van szükség a maximális keretméretre?
+	+ A szabvány készítésének idején drága volt a memória. A magasabb felső határ több memóriát igényelt volna.
+
+130. Miért van szükség a minimális keretméretre?
+	+ A maximális késleltetés és a CSMA/CD algoritmus közötti összefüggés miatt
+
+131. Mutassa be a minimális keretméretre vonatkozó általános képletet.
+	+ A maximális késleltetés és a CSMA/CD algoritmus közötti összefüggés miatt a keret elküldése minimum 2τ időre van szükség, ahol τ a két legtávolabbi állomás közötti késleltetést jelöli.
+
+132. Mik a kettes exponenciális visszalépés algoritmus lépései?
+	+ Az első ütközés után minden állomás 0 vagy 1 időrésnyit várakozik.
+	+ Az i-edik ütközés után minden állomás [0..min (2^i −1; 1023)] egész intervallumból véletlenszerűen kiválasztott időrésnyi ideig várakozik.
+	+ A 16-odik próbálkozás után a vezérlő bedobja a törölközőt, és hibajelzést küld a számítógépnek.
+
+133. Mutassa be a rejtett állomás problémáját.
+	+ A forgalmaz B-nek. Ha C belehallgat a csatornába, akkor nem hallja A adását, ezért tévesen arra következtethet, hogy elkezdhet sugározni. C elkezdi a küldést, akkor B-nél interferencia lép fel, és az A által küldött keret tönkre megy.
+	+ ![rejtett allomas](/images/133rejtett.png)
+
+134. Mutassa be a megvilágított állomás problémáját.
+	+  B forgalmaz A-nak. Ha C belehallgat a csatornába, akkor hallja B adását, ezért tévesen arra következtethet, hogy nem kezdhet sugározni D-nek, pedig ez csak a B és C közötti tartományban tenné lehetetlenné a keretek vételét
+	+ ![megvialgitott allomas](/images/134megvilagitott.png)
+
+135. Mik a MACA protokoll leglényegesebb lépései?
+	+ A küld B-nek egy felkérést: RTS keret.
+	+ B küld A-nak egy választ: CTS keret.
+	+ A küldi B-nek az adatot a CTS megérkezését követően.
+
+136. Mit nevezünk ad hoc hálózatnak.
+	+ Vezeték nélküli LAN egyik lehetséges elrendezési módja, melynél nincs bázisállomás, tehát az eszközök között közvetlen, központosítatlan kapcsolat van.
+
+137. Mi a Network Allocation Vector?
+	+ NAV. DCF (Distributed Coordination Function) esetén, a csatornát lefoglaló vektor, mely magában foglalja az ACK-t is.
+
+138. Mit neveznek Short Inter Frame Spacing-nek?
+	+ Lehetővé teszi, hogy a rövid párbeszédet folytató felek lehessenek az elsők.
+
+139. Mit neveznek DCF Inter Frame Spacing-nek?
+	+ Ezen intervallum lejárta után, akkor bármely állomás próbálkozhat, azaz versengés lesz.
+
+140. Mit neveznek PCF Inter Frame Spacing-nek?
+	+ Az SIFS intervallum után mindig pontosan egy állomás jogosult a válaszadásra, ha ezt nem tudja kihasználni, és eltelik ez az PIFS intervallum is, akkor a bázis állomás küldhet egy „beacon frame”-et vagy egy lekérdező keretet.
+
+141. Mit neveznek Extended Inter Frame Spacing-nek?
+	+ Ezt az időközt csak olyan állomások használhatják, amelyek épp egy hibás vagy ismeretlen keretet vettek, és ezt kívánják jelenteni.
+
+142. Mi a bridge, és mire használják?
+	+ Kettő vagy tobb LAN összekapcsolására szolgáló eszköz.
+
+143. Mi a repeater, és mire használják?
+	+ Analóg eszköz, amely két kábelszegmenshez csatlakozik. Az átvitel közben legyengült jelek újragenerálására használják. Nem végez intelligens forgalomirányítást.
