@@ -5,7 +5,7 @@ forrás:
 + előadás diái (http://people.inf.elte.hu/acszolta/computer_networks)
 + wikipedia (https://en.wikipedia.org/wiki/Revocation_list, https://en.wikipedia.org/wiki/Congestion_window, https://en.wikipedia.org/wiki/IPv4_subnetting_reference, https://en.wikipedia.org/wiki/IPv6_address, etc.)
 
-1. Hány réteget különböztet meg az Tannenbaum-féle hibrid rétegmodell?
+1. Hány réteget különböztet meg a Tannenbaum-féle hibrid rétegmodell?
 	+ 5 félét.
 
 2. Sorolja fel az ARPANET alapjául szolgáló három hálózatot.
@@ -33,7 +33,7 @@ forrás:
 	+ Wide Area Network - nagykiterjedésű hálózat, amely nagyobb területet fed le, jellemzően városok, országok közötti kommunikációt valósít meg.
 
 10. Mi az a MAN?
-	+ Metropolitan Area Network - Városi hálózat (LAN < MAN < WAN).
+	+ Metropolitan Area Network - Városi hálózat (PAN < LAN < MAN < WAN).
 
 11. Definiálja a hálózati sávszélességet?
 	+ Az adat átviteléhez elérhető vagy felhasznált kommunikációs erőforrás mérésére szolgáló mennyiség, amelyet bit per másodpercben szoktak kifejezni.
@@ -41,9 +41,9 @@ forrás:
 12. Definiálja a jel sávszélességet?
 	+ Jel feldolgozás esetén az egymást követő frekvenciák legnagyobb és legkisebb eleme közötti különbséget nevezik jel sávszélességnek. Tipikusan Hertz-ben mérik.
 
-13. Definiálja a átviteli késleltetést?
+13. Definiálja az átviteli késleltetést?
 	+ Az az időtartam, amely egy csomag összes bitjének az átviteli csatornára tételéhez szükséges.
-	Jelölése: d_T.
+	Jelölése: d_T (alsóindex).
 
 14. Definiálja a propagációs késést?
 	+ Az az időtartam, amely a jelnek szükséges ahhoz, hogy a küldőtől megérkezzen a címzetthez.
@@ -57,9 +57,9 @@ forrás:
 
 17. Mik azok a TLDs-ek?
 	+ Top Level Domains
-	klasszikusok: .com, .edu, .gov, .mil, .org, .net
-	később keletkeztek: .aero, .museum, .xxx
-	~250 TLDs a különböző ország kódoknak
+	+ klasszikusok: .com, .edu, .gov, .mil, .org, .net
+	+ később keletkeztek: .aero, .museum, .xxx
+	+ ~250 TLDs a különböző ország kódoknak
 	  + Két betű (mint például .au, .hu), 2010-től plusz nemzetközi karakterek (például kínai)
 	  + Több elüzletisedett, például a .tv (Tuvalu)
 	  + Példa domén hack-ekre: instagr.am (Örményország), goo.gl (Grönland)
@@ -164,7 +164,7 @@ forrás:
 
 41. Mi a CRC? Mire használható?
 	+ Hálózatok, tárolóegységek körében használt hibajelző kód.
-	+ A küldő az adatokhoz polinomosztással ( x^rM(x)/G(x) ) ellenőrzőértéket rendel. Fogadáskor a vevő elvégzi az osztást ( (T(x)+E(x))/G(x) ) a generátorpolinommal. Ha nem 0 eredményt kap, hiba történt.
+	+ A küldő az adatokhoz polinomosztással ( (x^r M(x)) / G(x) ) ellenőrzőértéket rendel. Fogadáskor a vevő elvégzi az osztást ( (T(x)+E(x))/G(x) ) a generátorpolinommal. Ha nem 0 eredményt kap, hiba történt.
 
 42. Hogyan történik egy TCP kapcsolat felépítése? Mik a lépései?
 	+  Rendszerint kliens szerver kapcsolat van.
@@ -635,13 +635,13 @@ forrás:
 * Rendelje a ************* fogalmat az TCP/IP rétegmodell megfelelõ rétegéhez.
 
 ALKALMAZÁSI RÉTEG (Application layer) (https://en.wikipedia.org/wiki/Category:Application_layer_protocols)
-	+ HTTP, DHCP, BitTorrent, munkamenet
+	+ HTTP, BitTorrent, munkamenet
 
 SZÁLLÍTÓI RÉTEG (Transport layer) (https://en.wikipedia.org/wiki/Category:Transport_layer_protocols)
 	+ SOCKET
 
 HÁLÓZATI RÉTEG (Internet layer) (https://en.wikipedia.org/wiki/Category:Internet_layer_protocols)
-	+ ICMP, forgalomirányítas, split horizon, routing table, BGP
+	+ DHCP, ICMP, forgalomirányítas, split horizon, routing table, BGP
 
 KAPCSOLATI RÉTEG (Link layer/Network Access/Network Interface) (https://en.wikipedia.org/wiki/Category:Link_protocols)
 	+ Ethernet, PPP, 10Base5, 10Base-F, 10Base2, 10Base-F,  (MACAW, NAV, RTS, CTS, backward learning ?)
